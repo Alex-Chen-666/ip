@@ -4,9 +4,11 @@
 public class Sigma {
     private final UI ui;
     private static final String BOT_NAME = "Sigma";
+    private final Tasks tasks;
     // Constructor
     public Sigma() {
         ui = new UI();
+        this.tasks = new Tasks();
     }
     /**
      * Starts the main loop of the chatbot.
@@ -25,10 +27,13 @@ public class Sigma {
                     ui.printLine();
                 } else if (fullCommand.isEmpty()) {  // Empty input
                     throw new SigmaException("Command cannot be empty!");
+                } else if (Parser.isList(fullCommand)) {   // User inputs 'list'
+                    ui.printTasks(tasks.getTasks(), tasks.getTaskCount());
                 } else {
-                    // Level 1 Echo logic
+                    // Level 2 : Add and echo
+                    tasks.addTask(fullCommand);
                     ui.printLine();
-                    ui.printMessage(fullCommand);
+                    ui.printMessage("added: " + fullCommand);
                     ui.printLine();
                 }
             } catch (SigmaException e) {

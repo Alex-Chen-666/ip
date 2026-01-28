@@ -11,4 +11,13 @@ public class Parser {
     public static boolean isExit(String input) {
         return input.trim().equalsIgnoreCase("bye");
     }
+    /**
+     * Returns true if the user input is the list command.
+     *
+     * @param input Full user input string.
+     * @return true/false
+     */
+    public static boolean isList(String input) {
+        return input.trim().equalsIgnoreCase("list");
+    }
 }
