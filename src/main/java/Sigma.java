@@ -5,7 +5,7 @@ public class Sigma {
     private final UI ui;
     private static final String BOT_NAME = "Sigma";
     private final Tasks tasks;
-    // Constructor
+    /** Constructor */
     public Sigma() {
         ui = new UI();
         this.tasks = new Tasks();
@@ -23,15 +23,32 @@ public class Sigma {
                 if (Parser.isExit(fullCommand)) { // User inputs 'bye'
                     isExit = true;
                     ui.printLine();
-                    ui.printGoodbye();
+                    ui.printMessage("Bye. Hope to see you again soon!");
                     ui.printLine();
                 } else if (fullCommand.isEmpty()) {  // Empty input
                     throw new SigmaException("Command cannot be empty!");
                 } else if (Parser.isList(fullCommand)) {   // User inputs 'list'
                     ui.printTasks(tasks.getTasks(), tasks.getTaskCount());
+                } else if (Parser.isMark(fullCommand)) { // Mark
+                    int index = Parser.extractIndex(fullCommand);
+                    Task selectedTask = tasks.getTask(index);
+                    selectedTask.markAsDone();
+                    ui.printLine();
+                    ui.printMessage("Nice! I've marked this task as done:");
+                    ui.printMessage(selectedTask.getString());
+                    ui.printLine();
+                } else if (Parser.isUnmark(fullCommand)) { // Unmark
+                    int index = Parser.extractIndex(fullCommand);
+                    Task selectedTask = tasks.getTask(index);
+                    selectedTask.unmarkAsDone();
+                    ui.printLine();
+                    ui.printMessage("OK, I've marked this task as not done yet:");
+                    ui.printMessage(selectedTask.getString());
+                    ui.printLine();
                 } else {
                     // Level 2 : Add and echo
-                    tasks.addTask(fullCommand);
+                    Task newTask = new Task(fullCommand);
+                    tasks.addTask(newTask);
                     ui.printLine();
                     ui.printMessage("added: " + fullCommand);
                     ui.printLine();

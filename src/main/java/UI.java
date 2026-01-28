@@ -34,19 +34,17 @@ public class UI {
         return input.nextLine();
     }
 
-    public void printGoodbye() {
-        printMessage("Bye. Hope to see you again soon!");
-    }
     /**
      * Display all tasks in the list with their index.
      *
      * @param tasks The array containing tasks.
      * @param count The number of tasks in the array.
      */
-    public void printTasks(String[] tasks, int count) {
+    public void printTasks(Task[] tasks, int count) {
         printLine();
-        for (int i = 0; i < count; i++) {
-            System.out.println("     " + (i + 1) + ". " + tasks[i]);
+        System.out.println("     Here are the tasks in your list:");
+        for (int i = 0; i<count; i++) {
+            System.out.println("     " + (i + 1) + "." + tasks[i].getString());
         }
         printLine();
     }
