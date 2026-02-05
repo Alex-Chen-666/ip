@@ -3,9 +3,9 @@
  */
 public class Task {
     /** Description of the task */
-    private String description;
+    protected String description;
     /** Completion status of the task */
-    private boolean isDone;
+    protected boolean isDone;
     /**
      * Initialize a task
      *
@@ -41,7 +41,7 @@ public class Task {
      *
      * @return The formatted string of the task.
      */
-    public String getString() {
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 }

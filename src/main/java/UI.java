@@ -8,9 +8,7 @@ public class UI {
     public UI() {
         this.input = new Scanner(System.in);
     }
-    /**
-     * Prints the horizontal line separator.
-     */
+
     public void printLine() {
         System.out.println(LINE);
     }
@@ -44,8 +42,15 @@ public class UI {
         printLine();
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i<count; i++) {
-            System.out.println("     " + (i + 1) + "." + tasks[i].getString());
+            System.out.println("     " + (i + 1) + "." + tasks[i].toString());
         }
+        printLine();
+    }
+    public void printTaskAdded(Task task, int count) {
+        printLine();
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + task.toString());
+        System.out.println("     Now you have " + count + " tasks in the list.");
         printLine();
     }
 }

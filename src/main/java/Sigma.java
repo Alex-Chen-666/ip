@@ -35,7 +35,7 @@ public class Sigma {
                     selectedTask.markAsDone();
                     ui.printLine();
                     ui.printMessage("Nice! I've marked this task as done:");
-                    ui.printMessage(selectedTask.getString());
+                    ui.printMessage(selectedTask.toString());
                     ui.printLine();
                 } else if (Parser.isUnmark(fullCommand)) { // Unmark
                     int index = Parser.extractIndex(fullCommand);
@@ -43,15 +43,24 @@ public class Sigma {
                     selectedTask.unmarkAsDone();
                     ui.printLine();
                     ui.printMessage("OK, I've marked this task as not done yet:");
-                    ui.printMessage(selectedTask.getString());
+                    ui.printMessage(selectedTask.toString());
                     ui.printLine();
+                } else if (Parser.isTodo(fullCommand)) {
+                    Task t = new Todo(Parser.getTodoInfo(fullCommand));
+                    tasks.addTask(t);
+                    ui.printTaskAdded(t, tasks.getTaskCount());
+                } else if (Parser.isDeadline(fullCommand)) {
+                    String[] info = Parser.getDeadlineInfo(fullCommand);
+                    Task t = new Deadline(info[0], info[1]);
+                    tasks.addTask(t);
+                    ui.printTaskAdded(t, tasks.getTaskCount());
+                } else if (Parser.isEvent(fullCommand)) {
+                    String[] info = Parser.getEventInfo(fullCommand);
+                    Task t = new Event(info[0], info[1], info[2]);
+                    tasks.addTask(t);
+                    ui.printTaskAdded(t, tasks.getTaskCount());
                 } else {
-                    // Level 2 : Add and echo
-                    Task newTask = new Task(fullCommand);
-                    tasks.addTask(newTask);
-                    ui.printLine();
-                    ui.printMessage("added: " + fullCommand);
-                    ui.printLine();
+                    throw new SigmaException("I'm sorry, I don't know what that means");
                 }
             } catch (SigmaException e) {
                 ui.printLine();
