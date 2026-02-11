@@ -1,3 +1,5 @@
+package sigma;
+
 /**
  * Main class for the Sigma chatbot.
  */

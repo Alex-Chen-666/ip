@@ -1,3 +1,5 @@
+package sigma;
+
 /**
  * Parse user input into meaningful instructions.
  */

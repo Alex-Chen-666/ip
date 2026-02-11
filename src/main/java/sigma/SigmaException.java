@@ -1,3 +1,5 @@
+package sigma;
+
 /**
  * exceptions specific to the Sigma chatbot.
  */
