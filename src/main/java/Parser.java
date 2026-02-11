@@ -52,15 +52,21 @@ public class Parser {
     public static String getTodoInfo(String input) throws SigmaException {
         String info = input.replaceFirst("(?i)todo", "").trim();
         if (info.isEmpty()) {
-            throw new SigmaException("The description of a todo cannot be empty.");
+            throw new SigmaException("Please tell me the description of a todo.");
         }
         return info;
     }
 
     public static String[] getDeadlineInfo(String input) throws SigmaException {
         String content = input.replaceFirst("(?i)deadline", "").trim();
+        if (content.isEmpty()) {
+            throw new SigmaException("Please tell me the description of a deadline.");
+        }
+        if (!content.contains(" /by ")) {
+            throw new SigmaException("A deadline needs a /by [time] component.");
+        }
         String[] parts = content.split(" /by ");
-        if (parts.length < 2 || parts[0].trim().isEmpty()) {
+        if (parts.length != 2 ) {
             throw new SigmaException("Deadline format: deadline [description] /by [time]");
         }
         return new String[]{parts[0].trim(),parts[1].trim()};
@@ -68,9 +74,18 @@ public class Parser {
 
     public static String[] getEventInfo(String input) throws SigmaException {
         String content = input.replaceFirst("(?i)event", "").trim();
+        if (content.isEmpty()) {
+            throw new SigmaException("Please tell me the description of an event.");
+        }
+        if (!content.contains(" /from ") || !content.contains(" /to ")) {
+            throw new SigmaException("An event needs /from [start] and /to [end] components.");
+        }
         String[] parts = content.split(" /from | /to ");
-        if (parts.length < 3) {
-            throw new SigmaException("Event format: event [description] /from [start] /to [end]");
+        if (parts.length != 3) {
+            throw new SigmaException("Event format: event [desc] /from [start] /to [end]");
+        }
+        if (parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
+            throw new SigmaException("The description, start time, and end time cannot be empty.");
         }
         return new String[]{parts[0].trim(), parts[1].trim(), parts[2].trim()};
     }
