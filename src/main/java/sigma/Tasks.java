@@ -1,55 +1,65 @@
 package sigma;
-
+import java.util.ArrayList;
 /**
  * Manage list of tasks.
  */
 public class Tasks {
-    private static final int MAX_TASKS = 100;
-    /** store task descriptions */
-    private final Task[] tasks;
-    /** Number of tasks currently in the list */
-    private int taskCount;
+    private final ArrayList<Task> tasks;
     /** Constructor */
     public Tasks() {
-        this.tasks = new Task[MAX_TASKS];
-        this.taskCount = 0;
+        this.tasks = new ArrayList<>();
     }
     /**
      * Add a task to the list.
      *
-     * @param task The description of the task.
+     * @param task The Task object to be added.
      */
-    public void addTask(Task task){
-        tasks[taskCount] = task;
-        taskCount++;
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+    /**
+     * Remove a task from the list.
+     *
+     * @param index The 1-based index of the task.
+     * @return The removed Task object.
+     * @throws SigmaException If the index is out of valid range.
+     */
+    public Task deleteTask(int index) throws SigmaException {
+        try {
+            return tasks.remove(index - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new SigmaException("Invalid task number.");
+        }
     }
     /**
      * Return a specific task (1-based index).
      *
      * @param index The index of the task.
      * @return The Task object at that index.
+     * @throws SigmaException If the index is out of bounds.
      */
     public Task getTask(int index) throws SigmaException {
-        if (index <= 0 || index > taskCount) {
+        try {
+            return tasks.get(index - 1);
+        } catch (IndexOutOfBoundsException e) {
             throw new SigmaException("Invalid task number.");
         }
-        return tasks[index - 1];
     }
     /**
-     * Return the array of tasks.
+     * Return the count of tasks in the list.
      *
-     * @return The array containing task descriptions.
+     * @return The size of the ArrayList.
      */
-    public Task[] getTasks() {
-        return tasks;
+    public int getTaskCount() {
+        return tasks.size();
     }
 
     /**
-     * Returns the number of tasks in the list.
+     * Return the internal ArrayList of tasks.
      *
-     * @return The count of valid tasks.
+     * @return The ArrayList.
      */
-    public int getTaskCount() {
-        return taskCount;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

@@ -30,7 +30,11 @@ public class Sigma {
                 } else if (fullCommand.isEmpty()) {  // Empty input
                     throw new SigmaException("Command cannot be empty!");
                 } else if (Parser.isList(fullCommand)) {   // User inputs 'list'
-                    ui.printTasks(tasks.getTasks(), tasks.getTaskCount());
+                    ui.printTasks(tasks.getTasks());
+                } else if (Parser.isDelete(fullCommand)) { // Delete
+                    int index = Parser.extractIndex(fullCommand);
+                    Task removedTask = tasks.deleteTask(index);
+                    ui.printTaskRemoved(removedTask, tasks.getTaskCount());
                 } else if (Parser.isMark(fullCommand)) { // Mark
                     int index = Parser.extractIndex(fullCommand);
                     Task selectedTask = tasks.getTask(index);
