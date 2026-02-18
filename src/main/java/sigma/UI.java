@@ -1,6 +1,7 @@
 package sigma;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 /**
  * Handles interactions with the user.
  */
@@ -35,22 +36,34 @@ public class UI {
     }
 
     /**
-     * Display all tasks in the list with their index.
+     * Display all tasks in the list.
      *
-     * @param tasks The array containing tasks.
-     * @param count The number of tasks in the array.
+     * @param tasks The ArrayList of tasks.
      */
-    public void printTasks(Task[] tasks, int count) {
+    public void printTasks(ArrayList<Task> tasks) {
         printLine();
         System.out.println("     Here are the tasks in your list:");
-        for (int i = 0; i<count; i++) {
-            System.out.println("     " + (i + 1) + "." + tasks[i].toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + tasks.get(i).toString());
         }
         printLine();
     }
     public void printTaskAdded(Task task, int count) {
         printLine();
         System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + task.toString());
+        System.out.println("     Now you have " + count + " tasks in the list.");
+        printLine();
+    }
+    /**
+     * Display confirmation for task removal.
+     *
+     * @param task The removed task.
+     * @param count The current number of tasks.
+     */
+    public void printTaskRemoved(Task task, int count) {
+        printLine();
+        System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + task.toString());
         System.out.println("     Now you have " + count + " tasks in the list.");
         printLine();

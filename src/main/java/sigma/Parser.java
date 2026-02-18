@@ -5,7 +5,7 @@ package sigma;
  */
 public class Parser {
     /**
-     * Returns true if the user input is the exit command.
+     * Return true if the user input is the exit command.
      *
      * @param input Full user input string.
      * @return true/false
@@ -44,8 +44,11 @@ public class Parser {
     public static boolean isEvent(String input) {
         return input.trim().toLowerCase().startsWith("event");
     }
+    public static boolean isDelete(String input) {
+        return input.trim().toLowerCase().startsWith("delete");
+    }
     /**
-     * Extracts the description of a todo.
+     * Extract the description of a todo.
      *
      * @param input Full command.
      * @return Description string.
