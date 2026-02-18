@@ -42,6 +42,7 @@ public class Sigma {
                 } else if (Parser.isDelete(fullCommand)) { // Delete
                     int index = Parser.extractIndex(fullCommand);
                     Task removedTask = tasks.deleteTask(index);
+                    storage.save(tasks);
                     ui.printTaskRemoved(removedTask, tasks.getTaskCount());
                 } else if (Parser.isMark(fullCommand)) { // Mark
                     int index = Parser.extractIndex(fullCommand);

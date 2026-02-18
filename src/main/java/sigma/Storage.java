@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Handle loading and saving tasks to a file on the hard disk.
@@ -34,9 +35,9 @@ public class Storage {
             }
 
             FileWriter fw = new FileWriter(file);
-            Task[] allTasks = tasks.getTasks();
-            for (int i = 0; i < tasks.getTaskCount(); i++) {
-                fw.write(allTasks[i].toFileFormat() + System.lineSeparator());
+            ArrayList<Task> allTasks = tasks.getTasks();
+            for (int i = 0; i < allTasks.size(); i++) {
+                fw.write(allTasks.get(i).toFileFormat() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {
