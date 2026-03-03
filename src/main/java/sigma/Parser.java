@@ -47,6 +47,31 @@ public class Parser {
     public static boolean isDelete(String input) {
         return input.trim().toLowerCase().startsWith("delete");
     }
+
+    /**
+     * Check if the command is a find command.
+     *
+     * @param input Raw user input.
+     * @return true if the command starts with "find".
+     */
+    public static boolean isFind(String input) {
+        return input.trim().toLowerCase().startsWith("find");
+    }
+
+    /**
+     * Extract the keyword from the find command.
+     *
+     * @param input Full command string.
+     * @return The keyword to search for.
+     * @throws SigmaException If the keyword is missing.
+     */
+    public static String getFindKeyword(String input) throws SigmaException {
+        String keyword = input.replaceFirst("(?i)find", "").trim();
+        if (keyword.isEmpty()) {
+            throw new SigmaException("Please provide a keyword to find.");
+        }
+        return keyword;
+    }
     /**
      * Extract the description of a todo.
      *

@@ -1,1 +1,2 @@
 T | 0 | cs2113 tutorial
+T | 0 | Tutorial

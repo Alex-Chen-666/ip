@@ -68,4 +68,21 @@ public class UI {
         System.out.println("     Now you have " + count + " tasks in the list.");
         printLine();
     }
+    /**
+     * Display the matching tasks found after a search.
+     *
+     * @param tasks The ArrayList of matching tasks.
+     */
+    public void printFoundTasks(ArrayList<Task> tasks) {
+        printLine();
+        if (tasks.isEmpty()) {
+            System.out.println("     No matching tasks found in your list.");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + tasks.get(i).toString());
+            }
+        }
+        printLine();
+    }
 }

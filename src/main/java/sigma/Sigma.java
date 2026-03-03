@@ -1,5 +1,7 @@
 package sigma;
 
+import java.util.ArrayList;
+
 /**
  * Main class for the Sigma chatbot.
  */
@@ -79,6 +81,10 @@ public class Sigma {
                     tasks.addTask(t);
                     storage.save(tasks);
                     ui.printTaskAdded(t, tasks.getTaskCount());
+                } else if (Parser.isFind(fullCommand)) { // Find logic
+                    String keyword = Parser.getFindKeyword(fullCommand);
+                    ArrayList<Task> matches = tasks.findTasks(keyword);
+                    ui.printFoundTasks(matches);
                 } else {
                     throw new SigmaException("I'm sorry, I don't know what that means");
                 }
