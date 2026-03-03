@@ -1,26 +1,59 @@
-# Duke project template
+# Sigma - CLI Task Management Chatbot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Sigma is a Java-based chatbot designed to help users manage tasks efficiently through a Command Line Interface (CLI). It supports various task types, including Todos, Deadlines, and Events, featuring full persistence and keyword search capabilities.
 
-## Setting up in Intellij
+---
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+## 📖 Documentation
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+The official **User Guide** for Sigma is available online via GitHub Pages:
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+👉 **[View the Sigma User Guide](https://alex-chen-666.github.io/ip/)**
+
+---
+
+## 🛠️ Setting up in IntelliJ
+
+Prerequisites: **JDK 17** (strictly required), and the latest version of IntelliJ IDEA.
+
+1. **Open the project**:
+   - Launch IntelliJ IDEA.
+   - Click `Open`.
+   - Select the project root directory and click `OK`.
+
+2. **Configure SDK**:
+   - Go to `File` > `Project Structure` > `Project`.
+   - Ensure the **SDK** is set to **JDK 17**.
+   - Set the **Project language level** to `17` or `SDK default`.
+
+3. **Run the Application**:
+   - Locate the main class at `src/main/java/sigma/Sigma.java`.
+   - Right-click the file and choose `Run 'Sigma.main()'`.
+   - You should see the welcome message from Sigma in the console.
+
+---
+
+## 🚀 Key Features
+
+*   **Task Management**: Add, delete, and list tasks.
+*   **Task Types**: Support for `todo`, `deadline` (with dates), and `event` (with duration).
+*   **Status Tracking**: Mark tasks as done (`mark`) or not done yet (`unmark`).
+*   **Keyword Search**: Quickly find tasks using the `find` command.
+*   **Auto-Save**: All data is automatically saved to `data/sigma.txt` and loaded upon startup.
+*   **Robust Error Handling**: Specific error messages for invalid inputs or corrupted data files.
+
+---
+
+## 📂 Project Structure
+
+Sigma follows a modular OOP architecture.
+All source files are organized within a single package: `sigma`.
+
+*   `Sigma`: The main entry point of the application.
+*   `UI`: Handles all user interactions and console output.
+*   `Parser`: Interprets and validates user commands.
+*   `Tasks`: Manages the in-memory task list using an `ArrayList`.
+*   `Storage`: Handles loading from and saving tasks to the hard disk.
+*   `Task`: The base class for all task types.
+*   `Todo`, `Deadline`, `Event`: Specific task subclasses inheriting from `Task`.
+*   `SigmaException`: Custom exception class for chatbot-specific errors.
